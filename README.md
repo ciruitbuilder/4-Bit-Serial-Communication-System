@@ -13,4 +13,5 @@ The logic mechanism i use to acheive this one by one enabling is designed by mys
 
  Enabling Circuit:
 
- 
+ <img width="688" height="300" alt="cell explanation" src="https://github.com/user-attachments/assets/69422008-3a0b-4234-ab5f-113e80f3ce94" />
+
