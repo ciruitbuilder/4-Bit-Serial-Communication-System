@@ -43,3 +43,4 @@ Both the receiver and transmitter share the same clock(clock of transmitter) and
 
 INPUT AND OUTPUT SR LATCHES:
 
+The SR latch at the tranmitter circ
