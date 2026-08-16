@@ -11,7 +11,7 @@ For the transmitter circuit, my objective was to design a logic circuit, that wh
 The logic mechanism i use to acheive this one by one enabling is designed by myself from scratch. The explanation on how i built the system in given below(called the "Enabling Circuit")
 
 
- Enabling Circuit:
+ Enabling Circuit(called "unit" here):
 
  <img width="688" height="300" alt="cell explanation" src="https://github.com/user-attachments/assets/69422008-3a0b-4234-ab5f-113e80f3ce94" />
 
@@ -19,5 +19,8 @@ The logic mechanism i use to acheive this one by one enabling is designed by mys
 
    the objective of this basic unit fo the mechanism is to, save binary 1 in a SR latch when clock goes low to high, save binary 0 in the SR latch when clock goes    high to low and pass the clock access to its next unit(by enabling its successive unit's tri state buffer and disabling its own).
 
-   these bits which are saved and change with time in the first SR latch(towards the left, lets call it latch A and the other on latch B) is used to enable the       tri state buffers of the parallel input bits
+   these bits which are saved (and change with time due to the clock) in the first SR latch(towards the left, lets call it latch A and the other on latch B) is       used to enable the tri state buffers of the parallel input bits.
+   latch A is used to save the main bit, and latch B is used to save the "usage history" of the main bit, once the latch A is set, its designed so that it            automatically sets latch B, logically indicating latch A has already been set once, this information is later used by further logic circuit to disable its         clock and enable clock for its successive unit
+
+   the Q of latch A is connected to the main clock of the system through two tri state buffers, for setting both the latches at once when clock goes from low to      high. 
    
