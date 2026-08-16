@@ -22,12 +22,12 @@ the objective of this basic unit fo the mechanism is to, save binary 1 in a SR l
 these bits which are saved (and change with time due to the clock) in the first SR latch(towards the left, lets call it latch A and the other on latch B) is       used to enable the tri state buffers of the parallel input bits.
 latch A is used to save the main bit, and latch B is used to save the "usage history" of the main bit, once the latch A is set, its designed so that it            automatically sets latch B, logically indicating latch A has already been set once, this information is later used by further logic circuits to disable this       unit's clock and enable clock for its successive unit
 
-2.Pair of tri state buffers:
+2. Pair of tri state buffers:
 
 the Q of latch A is connected to the main clock of the system through two tri state buffers, for setting both the latches at once when clock goes from low to   high. One tri state buffer is for enabling clock for rising pulse(enabled by default) and disable it once the latch A has been reset by falling clock pulse     (high to low)[i.e in short for units that has usage history : used(latch B in in set state)], another one is to not allow clock access for the successive units
 until the current unit(which as clock access) has its latch A reset by the falling clock pulse.
 
-3.XOR gate:
+3. XOR gate:
 
 The xor gate is used here to disable the clock access(using one of the tri state buffers) of the unit once the falling clock pulse resets latch A(while leaving    latch B set). Specifically, i chose a XOR gate because, when the latch A is reset, latch B remains set, so latch A stores 0 and latch B stores 1, to indicate      this state logically to cut clock access, i needed a gate that gives a output different than its normal state(when it receives both 1 and 1 or 0 and 0 in its      inputs[happens when clock pulse rises and also when history of usage is 0(the unit hasn't been used yet)]) when both of its inputs are different, which turned     out to be XOR gate.
 
