@@ -4,9 +4,9 @@ This is a 4 bit Serial communication system that takes 4 input bits, puts each o
 
 THE BUILD:
 
-TRANSMITTER:
+TRANSMITTER AND RECIEVER:
 
-For the transmitter circuit, my objective was to design a logic circuit, that when a 4 bit number is entered in a parallel manner, and all of those parallel inputs are connected into a single wire through tri state buffer. These tri state buffers are used to enable each of those buffers one at a time to transfer the input bits one by one into the main data wire.
+For the transmitter circuit, my objective was to design a logic circuit, that when a 4 bit number is entered in a parallel manner, and all of those parallel inputs are connected into a single wire through tri state buffer. These tri state buffers are used to enable each of those buffers one at a time to transfer the input bits one by one into the main data wire. Recciever too uses a similar enabling circuit, but the difference is the tri state buffers are inverted do that the data is loaded into a array of sr latches from the incoming ,single data wire as the buffers are enabled one at a time.
 
 The logic mechanism i use to acheive this one by one enabling is designed by myself from scratch. The explanation on how i built the system in given below(called the "Enabling Circuit")
 
@@ -35,4 +35,11 @@ the output of this xor gate is inverted(to have the clock enabled by default unt
 
 4. the AND gate:
    
-the and gate connected ot the reset pin of the latch A is responsible for resetting the latch A once the clock pulse fell from 0 to 1, this is achecived by        creating an inverted clock pulse(using NOT gate) of the original clock and feeding it to the andgate. AND gate is used here instead of just directly feeding       the inverted clock into the reset pin is because to only allow the reset operation to happen when the latch A in in set state(storing 1).
+the and gate connected to the reset pin of the latch A is responsible for resetting the latch A once the clock pulse fell from 0 to 1, this is achecived by        creating an inverted clock pulse(using NOT gate) of the original clock and feeding it to the andgate. AND gate is used here instead of just directly feeding       the inverted clock into the reset pin is because to only allow the reset operation to happen when the latch A in in set state(storing 1).
+
+This unit is replicated multiple times , equal to the number of necessary bits of data we need to transfer(here, 4 bits) and each individual unit's latch A 's output 1 is connected to the enable of the tri state buffers of the input switches and output latches
+
+Both the receiver and transmitter share the same clock(clock of transmitter) and inverted clock to maintain synchronous read of transmitted date to respective bits
+
+INPUT AND OUTPUT SR LATCHES:
+
